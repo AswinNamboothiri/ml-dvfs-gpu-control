@@ -1,42 +1,35 @@
 # Machine Learning-Based Voltage and Frequency Control for Energy-Efficient GPU Computing
 
-This repository contains all code, scripts, models, benchmarks, and results used in our project, based on predictive DVFS modeling for GPU power optimization using machine learning.
+This repository contains the full implementation of a predictive DVFS control system for GPU computing using machine learning.
 
-## 📂 Project Structure
-- `kernels/`: CUDA compute and memory benchmarks
-- `gpowerSAMPLER/`: Power sampling tool for NVIDIA GPUs
-- `data_collection/`: Scripts to collect power, performance, and frequency data
-- `datasets/`: Raw and processed data for ML model training
-- `models/`: ML training code and saved models
-- `deployment/`: Real-time ML-based DVFS controller
-- `experiments/`: Plots, logs, and result summaries
-- `paper/`: IEEE-format LaTeX paper and references
-- `docs/`: PhD thesis and supporting documentation
+## 📁 Repository Structure
+- `external/` – Git submodules from HPC-ULisboa:
+  - `gpuPTXModel`: CUDA benchmark kernels
+  - `gpowerSAMPLER`: Power sampling tool
+- `experiments/` – Logs, power traces, and output plots
+- `datasets/` – Raw and processed CSVs for training
+- `models/` – Trained ML models (.pkl)
+- `deployment/` – Runtime controller code
+- `scripts/` – All automation scripts and notebooks
 
-## 🚀 How to Run
+## 🔧 How to Use
+
 ```bash
-# Clone repo
-git clone https://github.com/your-username/ml-dvfs-gpu-control.git
+# Clone with submodules
+git clone --recurse-submodules https://github.com/your-username/ml-dvfs-gpu-control.git
 cd ml-dvfs-gpu-control
 
-# Install dependencies
-pip install -r requirements.txt
+# Step 1: Run all kernels and collect logs
+bash run_all_benchmarks.sh
 
-# Compile and run benchmark
-cd kernels/
-nvcc -o fp32_add fp32_add.cu
-./fp32_add
+# Step 2: Aggregate logs into training dataset
+python3 aggregate_logs.py
 
-# Power sample
-cd ../gpowerSAMPLER
-make
-./bin/gpowerSAMPLER ../kernels/fp32_add
-
-# Collect metrics and train ML model
-cd ../models
+# Step 3: Train ML model
 python3 train_model.py
 
-# Deploy DVFS controller
-cd ../deployment
-python3 dvfs_runtime_controller.py
+# Step 4: Visualize prediction accuracy
+python3 predict_and_plot.py
 
+# Step 5: Simulate live inference (adjustable for real deployment)
+python3 dvfs_runtime_controller.py
