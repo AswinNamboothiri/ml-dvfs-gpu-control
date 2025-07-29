@@ -1,0 +1,9 @@
+[submodule "external/gpuPTXModel"]
+	path = external/gpuPTXModel
+	url = https://github.com/hpc-ulisboa/gpuPTXModel
+[submodule "external/gpowerSAMPLER"]
+	path = external/gpowerSAMPLER
+	url = https://github.com/hpc-ulisboa/gpowerSAMPLER
+[submodule "external/gpupowermodel"]
+	path = external/gpupowermodel
+	url = https://github.com/hpc-ulisboa/gpupowermodel
