@@ -1,0 +1,14 @@
+# Logs and temporary files
+*.log
+*.csv
+*.png
+*.pkl
+
+# Compiled CUDA binaries
+*.o
+*.out
+
+# Folders to ignore if regenerated
+experiments/logs/
+datasets/processed/
+models/
